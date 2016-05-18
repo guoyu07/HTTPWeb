@@ -3,7 +3,7 @@ var http = require('http');
     var fs = require('fs');
     var io = require('socket.io');
 
-    //Create server will http library
+    //Create server with http library
     var server = http.createServer(function(request, response){
     	var path = url.parse(request.url).pathname;
 
