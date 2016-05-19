@@ -11,7 +11,7 @@ var http = require('http');
     	switch(path){
     		case '/':
     		    response.writeHead(200, {'Content-Type': 'text/html'});
-    		    response.write('Hellow World');
+    		    response.write('Hello World');
     		    response.end();
     		    break;
     		case '/socket.html':
@@ -34,17 +34,18 @@ var http = require('http');
     		    response.end();
     	}
 
+     //On connection emit message
      var listener = io.listen(server);
      listener.sockets.on('connection', function(socket){
      	socket.emit('message', {'message': 'hello world'});
      });
 
+     //On connection emit the current DateTime
      listener.sockets.on('connection', function(socket){
 	  	//send data to client/ time
 	  	setInterval(function(){
 	  		socket.emit('date', {'date': new Date()});
 	  	}, 1000);
-
 	  	//receive client data and print to command line
      	socket.on('client_data', function(data){
      		process.stdout.write(data.letter);
